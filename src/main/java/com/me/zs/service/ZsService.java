@@ -11,56 +11,56 @@ import org.springframework.stereotype.Service;
 @Service
 public class ZsService {
 
-	public Map<String, List<Map<String, String>>> getStocks(String codes) {
-		
-		List<String> zsList = Arrays.asList(codes.split(","));
+	/**
+	 * @param codes 新浪证券代码，多个使用逗号隔开
+	 * @return
+	 */
+	public Map<String, List<Map<String, String>>> getStock(String codes) {
+		String url = "https://hq.sinajs.cn/?list=" + codes;
 
+		String retjson = HttpUtil.doGet(url);
+
+		String[] jsonArray = retjson.replace("\n", "").replace("\"", "").split(";");
+		String[] codeArray = codes.split(",");
 		List<Map<String, String>> retList = new ArrayList<>();
-		for (String code : zsList) {
-			Map<String, String> temp = this.getStock(code);
-			retList.add(temp);
+
+		for (int i = 0; i < jsonArray.length; i++) {
+			String json = jsonArray[i];
+
+			String[] arraystr = json.replace("var hq_str_" + codeArray[i] + "=", "").split(",");
+
+			double now = 0;
+			double yestoday = 1;
+
+			Map<String, String> tempMap = new LinkedHashMap<>();
+			if (codeArray[i].contains("sh")) {
+				now = Double.parseDouble(arraystr[3]);
+				yestoday = Double.parseDouble(arraystr[2]);
+				tempMap.put("name", arraystr[0]);
+				tempMap.put("time", arraystr[30] + " " + arraystr[31]);
+			}
+
+			if (codeArray[i].contains("hk")) {
+				now = Double.parseDouble(arraystr[6]);
+				yestoday = Double.parseDouble(arraystr[3]);
+				tempMap.put("name", arraystr[1]);
+				tempMap.put("time", arraystr[17].replace("/", "-") + " " + arraystr[18].substring(0, 5));
+			}
+
+			if (codeArray[i].contains("sz")) {
+				now = Double.parseDouble(arraystr[3]);
+				yestoday = Double.parseDouble(arraystr[2]);
+				tempMap.put("name", arraystr[0]);
+				tempMap.put("time", arraystr[30] + " " + arraystr[31]);
+			}
+			tempMap.put("now", String.format("%.2f", now));
+			tempMap.put("percent", String.format("%.2f", (now - yestoday) / yestoday * 100));
+
+			retList.add(tempMap);
 		}
 
 		Map<String, List<Map<String, String>>> retMap = new LinkedHashMap<>();
 		retMap.put("resultList", retList);
-
-		return retMap;
-	}
-
-	public Map<String, String> getStock(String code) {
-		String url = "https://hq.sinajs.cn/?list=" + code;
-
-		String retjson = HttpUtil.doGet(url);
-		System.out.println(retjson);
-		String[] arraystr = retjson.replace("var hq_str_" + code + "=", "").replace("\"", "").split(",");
-
-		double now = 0;
-		double yestoday = 1;
-
-		Map<String, String> retMap = new LinkedHashMap<>();
-		if (code.contains("sh")) {
-			now = Double.parseDouble(arraystr[3]);
-			yestoday = Double.parseDouble(arraystr[2]);
-			retMap.put("name", arraystr[0]);
-			retMap.put("time", arraystr[30] + " " + arraystr[31]);
-		}
-
-		if (code.contains("hk")) {
-			now = Double.parseDouble(arraystr[6]);
-			yestoday = Double.parseDouble(arraystr[3]);
-			retMap.put("name", arraystr[1]);
-			retMap.put("time", arraystr[17].replace("/", "-") + " " + arraystr[18].substring(0, 5));
-		}
-
-		if (code.contains("sz")) {
-			now = Double.parseDouble(arraystr[3]);
-			yestoday = Double.parseDouble(arraystr[2]);
-			retMap.put("name", arraystr[0]);
-			retMap.put("time", arraystr[30] + " " + arraystr[31]);
-		}
-		retMap.put("now", String.format("%.2f", now));
-		retMap.put("percent", String.format("%.2f", (now - yestoday) / yestoday * 100));
-
 		return retMap;
 	}
 }

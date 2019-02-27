@@ -24,14 +24,14 @@ public class ZsController {
 
 	@GetMapping
 	public String homepage(Map<String, List<Map<String, String>>> map) {
-		Map<String, List<Map<String, String>>> map2 = zsService.getStocks(homepageStocks);
+		Map<String, List<Map<String, String>>> map2 = zsService.getStock(homepageStocks);
 		map.putAll(map2);
 		return "/ftl/zs";
 	}
 	
 	@GetMapping("/{code}")
 	public Object getStocks(@PathVariable(name = "code") String code,Map<String, List<Map<String, String>>> map) {
-		Map<String, List<Map<String, String>>> map2 = zsService.getStocks(code);
+		Map<String, List<Map<String, String>>> map2 = zsService.getStock(code);
 		map.putAll(map2);
 		return "/ftl/zs";
 	}

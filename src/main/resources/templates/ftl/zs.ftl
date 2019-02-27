@@ -2,13 +2,13 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
-		<title> 指数综合 </title>
+		<title> (ง •̀灬•́)ง </title>
 		<style>
-		.font{ font-family:"Microsoft YaHei Mono";}
+		.font{ font-family:"Microsoft YaHei Mono";background-color:#222222;color:#bfbfbf;text-align:center;line-height:15px}
 		</style>
 	</head>
-	<body class = "font" style = "background-color:#222222;color:#bfbfbf;text-align:center;">
-		<div style = "border-style:solid;border-width:1px;width:240px;position:relative;margin:auto;margin-top:5%;border-radius:16px;">
+	<body class = "font" >
+		<div style = "border-style:solid;border-width:1px;width:300px;position:relative;margin:auto;margin-top:5%;border-radius:16px;">
 			<div>
 
 			<#list resultList as lsit>
@@ -19,7 +19,7 @@
 			<#else>
 			<h3  style = "color:red;">${lsit.now}&nbsp&nbsp&nbsp&nbsp${lsit.percent} %</h3>
 			</#if>
-			<h3>${lsit.time}</h3>
+			<p>${lsit.time}</p>
 
 			</#list>
 			
