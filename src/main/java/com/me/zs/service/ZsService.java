@@ -53,7 +53,7 @@ public class ZsService {
 				tempMap.put("name", arraystr[0]);
 				tempMap.put("time", arraystr[30] + " " + arraystr[31]);
 			}
-			tempMap.put("now", String.format("%.2f", now));
+			tempMap.put("now", String.format("%.3f", now));
 			tempMap.put("percent", String.format("%.2f", (now - yestoday) / yestoday * 100));
 
 			retList.add(tempMap);

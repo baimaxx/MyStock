@@ -4,7 +4,7 @@
 		<meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
 		<title> (ง •̀灬•́)ง </title>
 		<style>
-		.font{ font-family:"Microsoft YaHei Mono";background-color:#222222;color:#bfbfbf;text-align:center;line-height:15px}
+		.font{ font-family:"Microsoft YaHei Mono";background-color:#ffffff;color:#515151;text-align:center;line-height:15px}
 		</style>
 	</head>
 	<body class = "font" >
