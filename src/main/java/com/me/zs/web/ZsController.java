@@ -35,5 +35,5 @@ public class ZsController {
 		map.putAll(map2);
 		return "/ftl/zs";
 	}
-	
+
 }
