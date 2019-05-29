@@ -1,6 +1,6 @@
 function autoRefresh() {
     if ($.cookie('refresh-time') != null) {
-        console.log("刷新间隔"+$.cookie('refresh-time'))
+        console.log("刷新间隔" + $.cookie('refresh-time'))
         setTimeout("window.location.reload();", $.cookie('refresh-time'));
     }
 }
@@ -60,15 +60,22 @@ $(document).ready(function () {
     $("#refresh").on("click", function () {
         if ($.cookie('refresh-time') == null) {
             $.cookie('refresh-time', "10000", {expires: 10, path: '/'});
-            window.location.reload();
-            console.log("启动自动刷新")
+            console.log("自动刷新(10s)")
+            showTips("自动刷新(10s)");
+            setTimeout("window.location.reload();", 2000);
         } else {
             $.cookie("refresh-time", "", {expires: -1});
-            window.location.reload();
-            console.log("停止自动刷新")
+            console.log("自动刷新已停止")
+            showTips("自动刷新已停止");
+            setTimeout("window.location.reload();", 2000);
         }
     })
 });
+
+function showTips(text) {
+    $(".tips").text(text);
+    $(".tips-div").fadeIn(300).delay(1000).fadeOut(400);
+}
 
 function doSearch(key) {
     var searchUrl = '/api/search/';
@@ -103,4 +110,9 @@ function addStock(event) {
         url += "," + innercode;
     }
     location.replace(url);
+}
+
+function sleep(n) {
+    var start = new Date().getTime();
+    while (true) if (new Date().getTime() - start > n) break;
 }
