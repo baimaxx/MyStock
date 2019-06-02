@@ -1,0 +1,86 @@
+.body {
+    background-color: #FAFAFA;
+}
+
+.green {
+    color: green
+}
+
+.red {
+    color: red
+}
+
+.td {
+    font-size: 16px;
+    text-align: center; /** 设置水平方向居中 */
+    vertical-align: middle; /** 设置垂直方向居中 */
+}
+
+#search-div {
+    height: 45px;
+}
+
+.suggest-td {
+    text-align: center; /** 设置水平方向居中 */
+    vertical-align: middle; /** 设置垂直方向居中 */
+}
+
+#suggest-form {
+    text-align: center;
+    opacity: 0.95;
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin-top: 46px;
+    color: #FFF;
+    background-color: #607D8B;
+    display: none;
+}
+
+.mui-btn--fab.mui-btn--mini {
+    width: 10px;
+    height: 10px;
+    line-height: 10px;
+}
+
+.innercode {
+    display: none;
+}
+
+.refresh-div {
+    position: fixed;
+    top: 90%;
+    left: 80%;
+    z-index: 998;
+}
+
+.refresh-img {
+    height: 32px;
+    width: 32px;
+    vertical-align: middle;
+}
+
+.tips-div {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    text-align: center;
+    display: none;
+}
+
+.tips-div .tips {
+    opacity: 0.95;
+    color: #FFF;
+    width: 40%;
+    height: 22px;
+    left: 30%;
+    top: 40%;
+    position: absolute;
+    margin-top: -1rem;
+    background-color: #455A64;
+    border-radius: .4rem;
+}
